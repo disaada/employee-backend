@@ -10,10 +10,22 @@
     "type": "git",
     "url": "git+https://github.com/disaada/employee-backend.git"
   },
-  "author": "",
+  "author": "disa",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/disaada/employee-backend/issues"
   },
-  "homepage": "https://github.com/disaada/employee-backend#readme"
+  "homepage": "https://github.com/disaada/employee-backend#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.0",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.1.0",
+    "pug": "^3.0.0",
+    "sequelize": "^6.3.4",
+    "twig": "^1.15.2"
+  }
 }
