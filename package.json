@@ -4,7 +4,8 @@
   "description": "backend data for employee project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./app/server.js"
   },
   "repository": {
     "type": "git",
@@ -24,8 +25,8 @@
     "mongoose": "^5.10.0",
     "morgan": "^1.10.0",
     "mysql2": "^2.1.0",
-    "pug": "^3.0.0",
+    "pug": "^3.0.0", 
     "sequelize": "^6.3.4",
-    "twig": "^1.15.2"
+    "twig": "^1.15.2" 
   }
 }
