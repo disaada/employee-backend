@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <form method="POST" action="/message/{{ data.id }}/update">
+            Message : <br />
+            <textarea name="message">{{ data.message }}</textarea> <br/>
+            <input type="submit" value="Send">
+        </form>
+    </body>
+</html>

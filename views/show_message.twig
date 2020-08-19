@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <ul>
+            <a href="/message/">New</a><br /><br />
+            {% for msg in data %}
+            <li>
+                {{ msg.message }} ||
+                <a href="/message_id/{{ msg.id }}">More</a>
+                <a href="/message/{{ msg.id }}/delete">Delete</a>
+                <a href="/message/{{ msg.id }}/edit">Edit</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
