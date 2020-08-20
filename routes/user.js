@@ -1,34 +1,8 @@
-const { Sequelize, DataTypes, Op } = require('sequelize')
-const sequelize = new Sequelize({
-    dialect: 'mysql',
-    host: 'localhost',
-    port: 3306,
-    username: 'employee_data',
-    password: '123',
-    database: 'employee_data'
-})
+const { Op } = require('sequelize')
 
-const User = sequelize.define('message',
-    {
-        id: {
-            type: DataTypes.NUMBER,
-            autoIncrement: true,
-            primaryKey: true
-        },
-        message: {
-            type: DataTypes.TEXT,
-            allowNull: false
-        }
-    }, {
-        tableName: 'message',
-        timestamps: false
-    }
-)
+const User = require('../models/user')
 
-const getMessage = (req, res) => {
-    const data = {message : req.params.msg}
-    res.render('message', data)
-}
+const getMessage = require('../models/message')
 
 const newMessage = (req, res) => {
     res.render('form_create')
