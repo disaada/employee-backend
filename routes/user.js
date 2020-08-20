@@ -1,86 +1,41 @@
+//db configuration
 const { Op } = require('sequelize')
-
 const User = require('../models/user')
+//end db configuration
 
-const getMessage = require('../models/message')
+const message = require('../models/message')
 
-const newMessage = (req, res) => {
-    res.render('form_create')
-}
+//show messages
+const showMessage = message.showMessage
+//end show messages
 
-const postMessage = (req, res) => {
-    //res.send(req.body)
-    User.create(req.body).then(
-        (msg) => res.redirect('/message/show'),
-        (err) => res.send(err)
-    )
-}
+//show messages by id
+const getId = message.getId
+//end show messages by id
 
-const showMessage = (req, res) => {
-    User.findAll().then(
-        (data) => res.render('show_message', { data }),
-        (err) => res.send(err)
-    )
-}
+//add messages
+const newMessage = message.newMessage
+const postMessage = message.postMessage
+//end add messages
 
-const deleteMessage = (req, res) => {
-    User.destroy({ where: {
-        id : {
-            [Op.eq]: req.params.id
-        }
-    }}).then(
-        () => res.redirect('/message/show'),
-        (err) => res.send(err)
-    )
-}
+//edit messages
+const getMessage = message.getMessage
+const editMessage = message.editMessage
+const updateMessage = message.updateMessage
+//end edit messages
 
-const getId = (req, res) => {
-    User.findOne({
-        where: {
-            id: {
-                [Op.eq]: req.params.msg
-            }
-        }
-    }).then(
-        (data) => {
-            res.send(data)
-            //res.render('message', data)
-        },
-        (err) => res.send(err)
-    )
-}
-
-const editMessage = (req, res) => {
-    User.findByPk(req.params.id).then(
-        (data) => {
-           res.render('edit_message', { data })
-        },
-        (err) => res.send(err)
-    )
-}
-
-const updateMessage = (req, res) => {
-    User.update(
-        req.body,
-        {
-            where: {
-                id: req.params.id
-            }
-        }
-    ).then(
-        (data) => res.redirect('/message/show'),
-        (err) => res.send(err)
-    )
-}
+//delete messages
+const deleteMessage = message.deleteMessage
+//end delete messages
 
 //ekspor hasil pengambilan objek
 module.exports = {
-    getMessage,
+    showMessage,
     getId,
     newMessage,
     postMessage,
-    showMessage,
-    deleteMessage,
+    getMessage,
     editMessage,
-    updateMessage
+    updateMessage,
+    deleteMessage
 }

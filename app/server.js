@@ -11,14 +11,20 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 //impor data objek dari file routes/user.js
 const message = require('../routes/user')
-app.get('/message/', message.newMessage)
-app.get('/message/show', message.showMessage)
+
+//show messages
+app.get('/message', message.showMessage)
+//show messages by id
+app.get('/message_id/:msg', message.getId)
+//add messages
+app.get('/message/form', message.newMessage)
 app.post('/message/new', message.postMessage)
+//edit messages
 app.post('/message/:id/update', message.updateMessage)
 app.get('/message/:msg', message.getMessage)
-app.get('/message_id/:msg', message.getId)
-app.get('/message/:id/delete', message.deleteMessage)
 app.get('/message/:id/edit', message.editMessage)
+//delete messages
+app.get('/message/:id/delete', message.deleteMessage)
 
 //menampilkan 'welcome' di browser
 app.get('/', (req, res) => {
