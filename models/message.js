@@ -4,7 +4,13 @@ const User = require('../models/user')
 //show messages
 const showMessage = (req, res) => {
     User.findAll().then(
-        (data) => res.render('show_message', { data }),
+        (data) => {
+                if(req.xhr){
+                    res.send(data)    
+                } else {
+                    res.render('show_message', { data })
+                }
+            },
         (err) => res.send(err)
     )
 }
@@ -84,6 +90,20 @@ const deleteMessage = (req, res) => {
     )
 }
 //end delete messages
+
+/* const all = (req, res) => {
+    User.findAll().then(
+        (data) => {
+                 if(req.xhr){
+                    res.send(data)    
+                } else {
+                    res.render('show_message', { data })
+                }
+                res.send(data)
+            },
+        (err) => res.send(err)
+    )
+} */
 
 module.exports = {
     showMessage,

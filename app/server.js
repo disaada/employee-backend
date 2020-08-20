@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 const app = express()
 const port = 4000
@@ -8,6 +9,7 @@ const port = 4000
 app.set('view engine', 'twig')
 //untuk JSON
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(cors())
 
 //impor data objek dari file routes/user.js
 const message = require('../routes/user')
