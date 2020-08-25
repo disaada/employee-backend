@@ -1,6 +1,16 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const fileupload = require('express-fileupload')
+
+const session = require('express-session')
+/* const sess = require('express-session-sequelize')
+const sessionStore = sess(session.Store)
+
+const db = require('../models/user')
+const sequelizeSessionStore = new sessionStore({
+  db: db.sequelize,
+}); */
 
 const app = express()
 const port = 4000
@@ -10,6 +20,7 @@ app.set('view engine', 'twig')
 //untuk JSON
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(cors())
+app.use(session({secret: 'keyboard cat'}));
 
 //impor data objek dari file routes/user.js
 const message = require('../routes/user')
@@ -27,6 +38,9 @@ app.get('/message/:msg', message.getMessage)
 app.get('/message/:id/edit', message.editMessage)
 //delete messages
 app.get('/message/:id/delete', message.deleteMessage)
+
+app.get('/login', login.get_login)
+app.post('/login/post', login.post_login)
 
 //menampilkan 'welcome' di browser
 app.get('/', (req, res) => {

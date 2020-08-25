@@ -45,15 +45,42 @@ const getId = (req, res) => {
 
 //add messages
 const newMessage = (req, res) => {
-  res.render('form_create')
+  const data = {
+    message: ""
+  }
+  res.render('form_create', data)
 }
 
-const postMessage = (req, res) => {
+function isAlphabetOnly(message) {
+  const regex = /[a-z\s]/g
+  const validation = message.match(regex)
+  const validationCount = validation.length
+  const msgCount = message.length
+  return (msgCount === validationCount)
+}
+
+const postMessage = async (req, res) => {
   //res.send(req.body)
-  User.create(req.body).then(
+
+  if(isAlphabetOnly(req.body.message)) {
+    const user = await User.create(req.body)
+    req.session.errMessage = undefined
+    req.session.oldValue = undefined
+    res.redirect('/message')
+  }
+  else {
+
+    const data = {
+      message: req.body.message
+    }
+
+    res.render('form_create', data)
+  }
+
+  /* .then(
     (msg) => res.redirect('/message'),
     (err) => res.send(err)
-  )
+  ) */
 }
 //end add messages
 

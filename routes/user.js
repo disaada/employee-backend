@@ -1,6 +1,6 @@
 //db configuration
-const { Op } = require('sequelize')
 const User = require('../models/user')
+//const User = models.user
 //end db configuration
 
 const message = require('../models/message')
