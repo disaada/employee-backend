@@ -2,8 +2,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const fileupload = require('express-fileupload')
-
 const session = require('express-session')
+const passport = require('passport')
 /* const sess = require('express-session-sequelize')
 const sessionStore = sess(session.Store)
 
@@ -21,10 +21,10 @@ app.set('view engine', 'twig')
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(cors())
 app.use(session({secret: 'keyboard cat'}));
+const { Strategy } = require('passport')
 
 //impor data objek dari file routes/user.js
-const message = require('../routes/user')
-
+const message = require('../routes/message')
 //show messages
 app.get('/message', message.showMessage)
 //show messages by id
@@ -39,8 +39,13 @@ app.get('/message/:id/edit', message.editMessage)
 //delete messages
 app.get('/message/:id/delete', message.deleteMessage)
 
+///////////////////////////LOGIN///////////////////////////
+const login = require('../routes/login')
 app.get('/login', login.get_login)
-app.post('/login/post', login.post_login)
+app.post('/login', login.post_login)
+///////////////////////////////////////////////////////////
+
+//app.get('/check_db', require('../routes/check_db'))
 
 //menampilkan 'welcome' di browser
 app.get('/', (req, res) => {

@@ -1,9 +1,9 @@
 //db configuration
-const User = require('../models/user')
+const User = require('../models2/user')
 //const User = models.user
 //end db configuration
 
-const message = require('../models/message')
+const message = require('./message')
 
 //show messages
 const showMessage = message.showMessage
