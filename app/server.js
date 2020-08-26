@@ -11,9 +11,9 @@ const db = require('../models/user')
 const sequelizeSessionStore = new sessionStore({
   db: db.sequelize,
 }); */
-
 const app = express()
 const port = 4000
+// const validationErrorHandling = require('./validationErrorHandling')
 
 //set template engine twig
 app.set('view engine', 'twig')
@@ -21,7 +21,7 @@ app.set('view engine', 'twig')
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(cors())
 app.use(session({secret: 'keyboard cat'}));
-const { Strategy } = require('passport')
+// app.use(validationErrorHandling);
 
 //impor data objek dari file routes/user.js
 const message = require('../routes/message')
@@ -41,8 +41,9 @@ app.get('/message/:id/delete', message.deleteMessage)
 
 ///////////////////////////LOGIN///////////////////////////
 const login = require('../routes/login')
+const loginValidation = require('../validation/login')
 app.get('/login', login.get_login)
-app.post('/login', login.post_login)
+app.post('/login', /* loginValidation, */ login.post_login)
 ///////////////////////////////////////////////////////////
 
 //app.get('/check_db', require('../routes/check_db'))
