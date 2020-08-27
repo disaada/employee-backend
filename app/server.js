@@ -1,6 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const app = express()
+const port = 4000
 
 const fileupload = require('express-fileupload')
 const passport = require('passport')
@@ -13,12 +15,15 @@ const db = require('../models')
 const sequelizeSessionStore = new SessionStore({
   db: db.sequelize,
 });
-const app = express()
-const port = 4000
-// const validationErrorHandling = require('./validationErrorHandling')
 
-//set template engine twig
-app.set('view engine', 'twig')
+const hbs = require('express-hbs')
+app.engine('hbs', hbs.express4({
+  partialsDir: __dirname + '../views/partials'
+}))
+//set template engine twig/hbs
+app.set('view engine', 'hbs')
+
+
 //untuk JSON
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(cors())
@@ -58,7 +63,7 @@ app.post('/login', /* loginValidation, */ login.post_login)
 
 //menampilkan 'welcome' di browser
 app.get('/', (req, res) => {
-    res.send('welcome')
+    res.render('home')
 })
 
 app.listen(port, '127.0.0.1', () => {
