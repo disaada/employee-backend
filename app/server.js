@@ -4,7 +4,6 @@ const cors = require('cors')
 const app = express()
 const port = 4000
 
-const fileupload = require('express-fileupload')
 const passport = require('passport')
 
 const session = require('express-session')
@@ -34,7 +33,8 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: 'auto' },
   store: sequelizeSessionStore
-}));
+}))
+app.use('/tmp', express.static('tmp'))
 // app.use(validationErrorHandling);
 
 //impor data objek dari file routes/user.js
@@ -60,7 +60,37 @@ app.get('/login', login.get_login)
 app.post('/login', /* loginValidation, */ login.post_login)
 ///////////////////////////////////////////////////////////
 
-//app.get('/check_db', require('../routes/check_db'))
+///////////////////////UPLOAD PHOTO////////////////////////
+const fileUpload = require('express-fileupload')
+const Photo = db.photo
+
+app.use(fileUpload({
+  useTempFiles : true,
+  tempFileDir : '../tmp'
+}))
+
+app.get('/photo', (req, res) => {
+  res.render('photo')
+})
+
+app.post('/photo/post', (req, res) => {
+
+  if(req.files) {
+    const { name } = req.files.photo
+
+    res.send(name)
+    Photo.create({
+      photo: name
+    }).then(
+      () => res.redirect('/photo'),
+      (err) => res.send(err)
+    )
+  } else {
+    res.send('No file uploaded')
+  }
+
+})
+///////////////////////////////////////////////////////////
 
 //menampilkan 'welcome' di browser
 app.get('/', (req, res) => {

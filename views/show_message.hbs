@@ -1,0 +1,13 @@
+{{#contentFor 'body'}}
+        <ul class="list-group">
+            <button class="btn btn-info"><a href="/message/form">New</a></button><br /><br />
+            {{#each data}}
+            <li class="list-group-item">
+                {{ message }} ||
+                <a href="/message_id/{{ id }}">More</a>
+                <a href="/message/{{ id }}/delete">Delete</a>
+                <a href="/message/{{ id }}/edit">Edit</a>
+            </li>
+            {{/each}}
+        </ul>
+{{/contentFor}}

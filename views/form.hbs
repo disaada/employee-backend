@@ -1,0 +1,20 @@
+{{#contentFor 'body'}}
+<div class="container">
+  <div class="py-5 text-center">
+    {{> header}}
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 order-md-2 mb-4">
+      {{> price}}
+    </div>
+    <div class="col-md-8 order-md-1">
+      {{> form}}
+    </div>
+  </div>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    {{> footer}}
+  </footer>
+</div>
+{{/contentFor}}

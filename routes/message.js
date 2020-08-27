@@ -6,7 +6,10 @@ const Message = models.message
 
 //show messages
 const showMessage = (req, res) => {
-  Message.findAll().then(
+  Message.findAll({
+    raw: true,
+    nest: true
+  }).then(
     (data) => {
       /* if(req.xhr){
           res.send(data)
@@ -16,9 +19,7 @@ const showMessage = (req, res) => {
       if (req.headers.accept === 'application/json') {
         res.send(data)
       } else {
-        res.render('show_message', {
-          data
-        })
+        res.render('show_message', {data})
       }
     },
     (err) => res.send(err)
