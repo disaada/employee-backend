@@ -18,7 +18,8 @@ const sequelizeSessionStore = new SessionStore({
 
 const hbs = require('express-hbs')
 app.engine('hbs', hbs.express4({
-  partialsDir: __dirname + '../views/partials'
+  partialsDir: __dirname + '/../views/partials',
+  defaultLayout: __dirname + '/../views/layout/default.hbs'
 }))
 //set template engine twig/hbs
 app.set('view engine', 'hbs')
