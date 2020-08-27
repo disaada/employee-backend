@@ -1,16 +1,18 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const fileupload = require('express-fileupload')
-const session = require('express-session')
-const passport = require('passport')
-/* const sess = require('express-session-sequelize')
-const sessionStore = sess(session.Store)
 
-const db = require('../models/user')
-const sequelizeSessionStore = new sessionStore({
+const fileupload = require('express-fileupload')
+const passport = require('passport')
+
+const session = require('express-session')
+const sess = require('express-session-sequelize')
+const SessionStore = sess(session.Store)
+
+const db = require('../models')
+const sequelizeSessionStore = new SessionStore({
   db: db.sequelize,
-}); */
+});
 const app = express()
 const port = 4000
 // const validationErrorHandling = require('./validationErrorHandling')
@@ -20,7 +22,13 @@ app.set('view engine', 'twig')
 //untuk JSON
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(cors())
-app.use(session({secret: 'keyboard cat'}));
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: 'auto' },
+  store: sequelizeSessionStore
+}));
 // app.use(validationErrorHandling);
 
 //impor data objek dari file routes/user.js
@@ -41,7 +49,7 @@ app.get('/message/:id/delete', message.deleteMessage)
 
 ///////////////////////////LOGIN///////////////////////////
 const login = require('../routes/login')
-const loginValidation = require('../validation/login')
+const loginValidation = require('../validation')
 app.get('/login', login.get_login)
 app.post('/login', /* loginValidation, */ login.post_login)
 ///////////////////////////////////////////////////////////

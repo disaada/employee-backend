@@ -24,6 +24,7 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.0",
+    "express-hbs": "^2.3.4",
     "express-joi-validation": "^4.0.4-beta.0",
     "express-session": "^1.17.1",
     "express-session-sequelize": "^2.3.0",

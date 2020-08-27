@@ -3,10 +3,22 @@
     <head></head>
     <body>
         <form method="POST" action="/login">
-            User : <input type="text" name="username"> <br/>
-            Pass : <input type="text" name="password"> <br/>
-            Email : <input type="text" name="email"> <br/>
-            Data birth : <input type="date" name="date_birth"> <br/>
+            User : <input type="text" name="username" value="{{ data.username.value }}" ><br/>
+            {% if data.username.error %}
+              <p>{{ data.username.error }}</p>
+            {% endif %}
+            Pass : <input type="text" name="password" value="{{ data.password.value }}"> <br/>
+            {% if data.password.error %}
+              <p>{{ data.password.error }}</p>
+            {% endif %}
+            Email : <input type="text" name="email" value="{{ data.email.value }}"> <br/>
+            {% if data.email.error %}
+              <p>{{ data.email.error }}</p>
+            {% endif %}
+            Data birth : <input type="date" name="date_birth" value="{{ data.date_birth.value }}"> <br/>
+            {% if data.date_birth.error %}
+              <p>{{ data.date_birth.error }}</p>
+            {% endif %}
             <input type="submit" value="Send">
         </form>
     </body>
